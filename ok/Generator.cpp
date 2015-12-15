@@ -14,7 +14,7 @@ void Generator::generuj(int seed)
 	for (int i = 0; i < n; i++) {
 		int t1 = rand() % dlugoscOperacji + 1;
 		int t2= rand() % dlugoscOperacji + 1;
-		int r = rand() % (2 * dlugoscOperacji);
+		int r = rand() % (n/10 * dlugoscOperacji);
 		plik << t1 << ";" << t2 << ";" << r << ";"<< endl;
 	}
 	int start=0, time=0;
