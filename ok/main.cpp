@@ -15,6 +15,7 @@ void generuj() {
 		a.generuj(0);
 		a.generuj(1);
 	}
+	
 
 
 }
@@ -59,4 +60,7 @@ int main() {
 	Rozwiazanie* roz = new Rozwiazanie(instancja);
 	roz->print();
 	system("pause");
+
+
+	delete instancja, roz;
 }

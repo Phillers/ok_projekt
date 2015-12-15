@@ -20,7 +20,7 @@ void Generator::generuj(int seed)
 	int start=0, time=0;
 	plik << liczbaPrzerw << endl;
 	for (int i = 0; i < liczbaPrzerw; i++) {
-		start = rand() % dlugoscOperacji + start + time;
+		start = rand() % ((n/liczbaPrzerw+1)*dlugoscOperacji) + start + time;
 		time = rand() % dlugoscOperacji + 1;
 		plik  << time << ";" << start << ";" << endl;
 	}

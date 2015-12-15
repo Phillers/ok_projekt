@@ -10,8 +10,13 @@ class Rozwiazanie
 {
 	Instancja* inst;
 	int* kolejnosc1;
+	int* start1;
+	int* konce;
 	int* kolejnosc2;
+	int* start2;
+	int* konce2;
 	int wartosc;
+	void uporzadkuj2m();
 public:
 	int policz();
 	Rozwiazanie(Instancja* inst);
