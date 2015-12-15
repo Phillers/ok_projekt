@@ -1,6 +1,6 @@
 #pragma once
 #include "Zadanie.h"
-#include"Rozwiazanie.h"
+
 class Instancja
 {
 	int n, k;
@@ -9,7 +9,6 @@ class Instancja
 	int pierwszaWartosc = 0;
 
 public:
-	Rozwiazanie* generujLosowe();
 	int z();
 	Zadanie z(int i);
 	int p();

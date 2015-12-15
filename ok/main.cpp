@@ -1,6 +1,7 @@
 #include"Generator.h"
 #include"Zadanie.h"
 #include"Instancja.h"
+#include"Rozwiazanie.h"
 void generuj() {
 	//20
 	for (int i = 1; i <= 5; i++) {
@@ -33,7 +34,7 @@ Instancja* wczytaj(int nr) {
 		int a, b, c;
 
 		plik >> a >>x>> b >> x >> c >> x;
-		cout <<" "<< a << " " << b << " " << c<<endl;
+		//cout <<" "<< a << " " << b << " " << c<<endl;
 		zadania[i].t1 = a;
 		zadania[i].t2 = b;
 		zadania[i].r = c;
@@ -43,7 +44,7 @@ Instancja* wczytaj(int nr) {
 	for (int i = 0; i < k; i++) {
 		int a, b;
 		plik >> a >> x >> b >> x;
-		cout << " " << a << " " << b << endl;
+		//cout << " " << a << " " << b << endl;
 		przerwy[i].t = a;
 		przerwy[i].s = b;
 		przerwy[i].k = a+b;
@@ -55,5 +56,7 @@ Instancja* wczytaj(int nr) {
 int main() {
 	//generuj();
 	Instancja* instancja=wczytaj(0);
+	Rozwiazanie* roz = new Rozwiazanie(instancja);
+	roz->print();
 	system("pause");
 }

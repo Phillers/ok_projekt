@@ -1,6 +1,11 @@
 #pragma once
-//#include"Instancja.h"
-class Instancja;
+#include<cstdlib>
+#include<ctime>
+#include<iostream>
+#include"Zadanie.h"
+#include"Instancja.h"
+
+using namespace std;
 class Rozwiazanie
 {
 	Instancja* inst;
@@ -9,8 +14,9 @@ class Rozwiazanie
 	int wartosc;
 public:
 	int policz();
-	Rozwiazanie(Instancja* inst,int* kolejnosc);
+	Rozwiazanie(Instancja* inst);
 	Rozwiazanie();
+	void print();
 	~Rozwiazanie();
 };
 

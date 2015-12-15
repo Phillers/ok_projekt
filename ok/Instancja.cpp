@@ -2,10 +2,6 @@
 
 
 
-Rozwiazanie* Instancja::generujLosowe()
-{
-	return nullptr;
-}
 
 int Instancja::z()
 {
