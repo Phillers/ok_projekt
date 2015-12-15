@@ -33,42 +33,49 @@ void Rozwiazanie::uporzadkuj2m()
 	start2 = new int[n];
 	start2[0] = konce[kolejnosc2[0]];
 	konce2 = new int[n];
-	konce2[0] = start2[0] + z1.t2;
+	konce2[kolejnosc2[0]] = start2[0] + z1.t2;
 	for (int i = 1; i < n; i++) {
 		z1 = inst->z(kolejnosc2[i]);
 		start2[i] = konce[kolejnosc2[i]]>konce2[kolejnosc2[i - 1]] ? konce[kolejnosc2[i]] : konce2[kolejnosc2[i - 1]];
 		konce2[kolejnosc2[i]] = start2[i] + z1.t2;
 	}
+
 	for (int i = 1; i < n; i++) {
 		z1= inst->z(kolejnosc2[i]);
 		if (konce[kolejnosc2[i]] + z1.t2 < start2[0]) {
 			int tmp = kolejnosc2[i];
 			for (int j = i; j > 0; j--) {
+				
 				kolejnosc2[j] = kolejnosc2[j - 1];
 				start2[j] = start2[j - 1];
-				konce2[j] = konce2[j - 1];
+				konce2[kolejnosc2[j]] = konce2[kolejnosc2[j - 1]];
 			}
 			kolejnosc2[0] = tmp;
 			start2[0] = konce[kolejnosc2[0]];
-			konce2[0] = start2[0] + z1.t2;
+			konce2[kolejnosc2[0]] = start2[0] + z1.t2;
+
 		}else {
 			int j = 1;
 			while (konce[kolejnosc2[i]]>start2[j])j++;
 			for (; j < i; j++) {
-				int x = (konce2[j - 1] > konce[kolejnosc2[i]] ? konce2[j - 1] : konce[kolejnosc2[i]]);
+				int x = (konce2[kolejnosc2[j - 1]] > konce[kolejnosc2[i]] ? konce2[kolejnosc2[j - 1]] : konce[kolejnosc2[i]]);
 				if (start2[j]>(x + z1.t2)) {
 					int tmp = kolejnosc2[i];
 					for (int l = i; l >j; l--) {
+						
 						kolejnosc2[l] = kolejnosc2[l - 1];
 						start2[l] = start2[l - 1];
-						konce2[l] = konce2[l - 1];
+						konce2[kolejnosc2[l]] = konce2[kolejnosc2[l - 1]];
 					}
+					
 					kolejnosc2[j] = tmp;
 					start2[j] = x;
-					konce2[j] = x + z1.t2;
+					konce2[kolejnosc2[j]] = x + z1.t2;
+
 				}
 			}
 		}
+
 	}
 }
 
@@ -110,7 +117,7 @@ Rozwiazanie::Rozwiazanie()
 void Rozwiazanie::print()
 {
 	for (int i = 0; i < inst->z(); i++) {
-		cout << kolejnosc1[i] << "\t"<< (konce!=0?konce[kolejnosc1[i]]:0) <<"\t" << kolejnosc2[i] <<"\t" <<konce2[kolejnosc2[i]]<< endl;
+		cout << kolejnosc1[i] << "\t"<< konce[kolejnosc1[i]] <<"\t" << konce2[kolejnosc1[i]] <<"\t"<< kolejnosc2[i] <<"\t" <<konce2[kolejnosc2[i]]<< endl;
 	}
 }
 
