@@ -2,8 +2,30 @@
 
 
 
+Rozwiazanie* Instancja::generujLosowe()
+{
+	return nullptr;
+}
 
+int Instancja::z()
+{
+	return n;
+}
 
+Zadanie Instancja::z(int i)
+{
+	return zadania[i];
+}
+
+int Instancja::p()
+{
+	return k;
+}
+
+Przerwa Instancja::p(int i)
+{
+	return przerwy[i];
+}
 
 Instancja::Instancja(int n,Zadanie *zadania,int k,Przerwa *przerwy)
 {
