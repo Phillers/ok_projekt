@@ -23,6 +23,7 @@ public:
 	Rozwiazanie();
 	void print();
 	Rozwiazanie* mutacja(int x);
+	Rozwiazanie* krzyzowanie(Rozwiazanie* partner);
 	~Rozwiazanie();
 };
 

@@ -148,6 +148,31 @@ Rozwiazanie * Rozwiazanie::mutacja(int x)
 	return res;
 }
 
+Rozwiazanie * Rozwiazanie::krzyzowanie(Rozwiazanie * partner)
+{
+	Rozwiazanie* res = new Rozwiazanie();
+	res->inst = inst;
+	
+	int n = inst->p();
+	int* used = new int[n];
+	for (int i = 0; i < n/2; i++) {
+		res->kolejnosc1[i] = kolejnosc1[i];
+		used[kolejnosc1[i] |= 1];
+		res->kolejnosc2[i] = kolejnosc2[i];
+		used[kolejnosc2[i]] |= 2;
+	}
+	int j = 0; j2 = 0;
+	for(int i = n/2; i < n; i++) {
+		while (used[partner->kolejnosc1[j]] & 1)j++;
+		res->kolejnosc1[i] = partner->kolejnosc1[j];
+		while (used[partner->kolejnosc2[j2]] & 1)j2++;
+		res->kolejnosc2[i] = partner->kolejnosc2[j2];
+
+	}
+	res->uporzadkuj2m();
+	return res;
+}
+
 
 Rozwiazanie::~Rozwiazanie()
 {
