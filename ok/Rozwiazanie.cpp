@@ -71,7 +71,7 @@ void Rozwiazanie::uporzadkuj2m()
 					kolejnosc2[j] = tmp;
 					start2[j] = x;
 					konce2[kolejnosc2[j]] = x + z1.t2;
-
+					continue;
 				}
 			}
 		}
