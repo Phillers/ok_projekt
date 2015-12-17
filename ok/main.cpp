@@ -59,6 +59,8 @@ int main() {
 	Instancja* instancja=wczytaj(0);
 	Rozwiazanie* roz = new Rozwiazanie(instancja);
 	roz->print();
+	roz = roz->mutacja(5);
+	roz->print();
 	system("pause");
 
 

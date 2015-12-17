@@ -77,6 +77,8 @@ void Rozwiazanie::uporzadkuj2m()
 		}
 
 	}
+	wartosc = 0;
+	for (int i = 0; i < n; i++)wartosc += (konce[i] + konce2[i]);
 }
 
 int Rozwiazanie::policz()
@@ -119,6 +121,31 @@ void Rozwiazanie::print()
 	for (int i = 0; i < inst->z(); i++) {
 		cout << kolejnosc1[i] << "\t"<< konce[kolejnosc1[i]] <<"\t" << konce2[kolejnosc1[i]] <<"\t"<< kolejnosc2[i] <<"\t" <<konce2[kolejnosc2[i]]<< endl;
 	}
+}
+
+Rozwiazanie * Rozwiazanie::mutacja(int x)
+{
+	srand(time(0));
+	Rozwiazanie* res = new Rozwiazanie(*this);
+	int n;
+	int i1 = rand() % (n=inst->z());
+	int tmp = res->kolejnosc1[i1];
+	for (int i = 1; i < x; i++) {
+		int j = rand() % n;
+		res->kolejnosc1[i1] = res->kolejnosc1[j];
+		i1 = j;
+	}
+	res->kolejnosc1[i1] = tmp;
+	i1 = rand() % (n = inst->z());
+	tmp = res->kolejnosc2[i1];
+	for (int i = 1; i < x; i++) {
+		int j = rand() % n;
+		res->kolejnosc2[i1] = res->kolejnosc2[j];
+		i1 = j;
+	}
+	res->kolejnosc2[i1] = tmp;
+	res->uporzadkuj2m();
+	return res;
 }
 
 

@@ -10,9 +10,9 @@ class Instancja
 
 public:
 	int z();
-	Zadanie z(int i);
+	Zadanie& z(int i);
 	int p();
-	Przerwa p(int i);
+	Przerwa& p(int i);
 	Instancja(int n,Zadanie*,int k,Przerwa*);
 	~Instancja();
 };

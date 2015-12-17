@@ -22,6 +22,7 @@ public:
 	Rozwiazanie(Instancja* inst);
 	Rozwiazanie();
 	void print();
+	Rozwiazanie* mutacja(int x);
 	~Rozwiazanie();
 };
 

@@ -8,7 +8,7 @@ int Instancja::z()
 	return n;
 }
 
-Zadanie Instancja::z(int i)
+Zadanie& Instancja::z(int i)
 {
 	return zadania[i];
 }
@@ -18,7 +18,7 @@ int Instancja::p()
 	return k;
 }
 
-Przerwa Instancja::p(int i)
+Przerwa& Instancja::p(int i)
 {
 	return przerwy[i];
 }
