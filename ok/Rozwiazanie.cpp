@@ -125,10 +125,18 @@ void Rozwiazanie::print()
 
 Rozwiazanie * Rozwiazanie::mutacja(int x)
 {
+	int n = inst->z();
 	srand(time(0));
-	Rozwiazanie* res = new Rozwiazanie(*this);
-	int n;
-	int i1 = rand() % (n=inst->z());
+	cout << rand() << endl;
+	Rozwiazanie* res = new Rozwiazanie();
+	res->inst = inst;
+	res->kolejnosc1 = new int[n];
+	res->kolejnosc2 = new int[n];
+	for (int i = 0; i < n; i++) {
+		res->kolejnosc1[i] = kolejnosc1[i];
+		res->kolejnosc2[i] = kolejnosc2[i];
+	}
+	int i1 = rand() % (n);
 	int tmp = res->kolejnosc1[i1];
 	for (int i = 1; i < x; i++) {
 		int j = rand() % n;
@@ -150,23 +158,38 @@ Rozwiazanie * Rozwiazanie::mutacja(int x)
 
 Rozwiazanie * Rozwiazanie::krzyzowanie(Rozwiazanie * partner)
 {
+	int n = inst->z();
 	Rozwiazanie* res = new Rozwiazanie();
 	res->inst = inst;
-	
-	int n = inst->p();
+	res->kolejnosc1 = new int[n];
+	res->kolejnosc2 = new int[n];
 	int* used = new int[n];
+	for (int i = 0; i < n; i++) {
+		used[i] = 0;
+
+	}
 	for (int i = 0; i < n/2; i++) {
 		res->kolejnosc1[i] = kolejnosc1[i];
-		used[kolejnosc1[i] |= 1];
+		used[kolejnosc1[i]] |= 1;
 		res->kolejnosc2[i] = kolejnosc2[i];
 		used[kolejnosc2[i]] |= 2;
+
 	}
-	int j = 0; j2 = 0;
+	int j = 0, j2 = 0;
+
+
 	for(int i = n/2; i < n; i++) {
-		while (used[partner->kolejnosc1[j]] & 1)j++;
-		res->kolejnosc1[i] = partner->kolejnosc1[j];
-		while (used[partner->kolejnosc2[j2]] & 1)j2++;
-		res->kolejnosc2[i] = partner->kolejnosc2[j2];
+
+		while (used[partner->kolejnosc1[j]] %2==1) {
+
+			j++;
+		}
+		res->kolejnosc1[i] = partner->kolejnosc1[j++];
+		while (used[partner->kolejnosc2[j2]] >1) {
+
+			j2++;
+		}
+		res->kolejnosc2[i] = partner->kolejnosc2[j2++];
 
 	}
 	res->uporzadkuj2m();

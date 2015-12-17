@@ -59,10 +59,21 @@ int main() {
 	Instancja* instancja=wczytaj(0);
 	Rozwiazanie* roz = new Rozwiazanie(instancja);
 	roz->print();
-	roz = roz->mutacja(5);
+	cout << endl;
+	Rozwiazanie* roz2 = roz->mutacja(10);
+	roz2->print();
+	cout << endl;
+	roz = roz->mutacja(10);
+
 	roz->print();
+	cout << endl;
+	roz = roz->krzyzowanie(roz2);
+	roz->print();
+	cout << endl;
+	//for (int i = 0; i < 1000; i++)cout << time(0) << " ";
 	system("pause");
 
+	cout << endl;
 
 	delete instancja, roz;
 }
