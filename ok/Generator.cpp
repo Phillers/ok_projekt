@@ -22,7 +22,8 @@ void Generator::generuj(int seed)
 	for (int i = 0; i < liczbaPrzerw; i++) {
 		start = rand() % ((n/liczbaPrzerw+1)*dlugoscOperacji) + start + time;
 		time = rand() % dlugoscOperacji + 1;
-		plik  << time << ";" << start << ";" << endl;
+		int maszyna = rand() % 2 + 1;
+		plik  << time << ";" << start << ";" << maszyna << ";" << endl;
 	}
 	plik << "**** EOF ****" << endl;
 	plik.close();
