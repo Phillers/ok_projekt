@@ -6,7 +6,7 @@ class Instancja
 	int n, k;
 	Zadanie* zadania;
 	Przerwa* przerwy;
-	int pierwszaWartosc = 0;
+	//int pierwszaWartosc = 0;
 
 public:
 	int z();

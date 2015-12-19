@@ -2,6 +2,9 @@
 #include<cstdlib>
 #include<ctime>
 #include<iostream>
+#include<fstream>
+#include<sstream>
+#include<iostream>
 #include"Zadanie.h"
 #include"Instancja.h"
 
@@ -24,6 +27,8 @@ public:
 	void print();
 	Rozwiazanie* mutacja(int x);
 	Rozwiazanie* krzyzowanie(Rozwiazanie* partner);
+	int w();
+	void zapisz(int nr, int wartosc_poczatkowa);
 	~Rozwiazanie();
 };
 
