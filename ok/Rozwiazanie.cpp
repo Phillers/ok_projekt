@@ -220,7 +220,7 @@ void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
 	plik << "M1:";
 	int i=0;
 	int czas=0;
-	while(i < n-1) {
+	while(i < n) {
 		if(czas == start1[0]) {//wykonywanie operacji
 			plik << " op1_" << kolejnosc1[i] << ", " << start1[i] << ", " << konce[kolejnosc1[i]]-start1[i] << ";";
 			czas = konce[kolejnosc1[i]];
@@ -248,7 +248,7 @@ void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
 	plik << "M2:";
 	i = 0;
 	czas = 0;
-	while(i < n-1) {
+	while(i < n) {
 		if(czas == start2[0]) {//wykonywanie operacji
 			plik << " op2_" << kolejnosc2[i] << ", " << start2[i] << ", " << konce[kolejnosc2[i]]-start2[i] << ";";
 			czas = konce[kolejnosc2[i]];
