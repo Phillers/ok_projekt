@@ -57,7 +57,6 @@ Instancja* wczytaj(int nr) {
 
 
 
-
 int main() {
 	//generuj();
 	Instancja* instancja=wczytaj(0);
