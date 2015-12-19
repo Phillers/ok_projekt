@@ -31,4 +31,3 @@ public:
 	void zapisz(int nr, int wartosc_poczatkowa);
 	~Rozwiazanie();
 };
-
