@@ -196,6 +196,82 @@ Rozwiazanie * Rozwiazanie::krzyzowanie(Rozwiazanie * partner)
 	return res;
 }
 
+int Rozwiazanie::w() {
+	return wartosc;
+}
+
+void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
+	int n = inst->z();
+	stringstream nazwa;
+	nazwa << "rozwiazania\\roz" << nr;
+	ofstream plik;
+	plik.open(nazwa.str());
+	plik << "**** " << nr <<" ****"<<endl;
+	plik << wartosc << "," << wartosc_poczatkowa << endl;
+
+	int p_konserwujaca[2];
+	int p_idle[4];
+	for(int j=0; j < 4; j++) {
+		p_idle[j] = 0;
+	}
+	p_konserwujaca[0] = 0;
+	p_konserwujaca[1] = 0;
+
+	plik << "M1:";
+	int i=0;
+	int czas=0;
+	while(i < n-1) {
+		if(czas == start1[0]) {//wykonywanie operacji
+			plik << " op1_" << kolejnosc1[i] << ", " << start1[i] << ", " << konce[kolejnosc1[i]]-start1[i] << ";";
+			czas = konce[kolejnosc1[i]];
+			i++;
+		}
+		else
+			if(czas == inst->p(p_konserwujaca[0]).s) {//przerwa konserwujaca
+				plik << " maint" << p_konserwujaca[0] << "_M1, " << inst->p(p_konserwujaca[0]).s << ", "
+					 << inst->p(p_konserwujaca[0]).t << ";";
+				czas = inst->p(p_konserwujaca[0]).k;
+				p_konserwujaca[1]+=inst->p(p_konserwujaca[0]).t;
+				p_konserwujaca[0]++;
+			}
+			else {//nic sie nie dzieje
+				int tmp = (inst->p(p_konserwujaca[0]).s < start1[i] ? inst->p(p_konserwujaca[0]).s : start1[i]);
+				int tmp2 = tmp-czas;
+				plik << " idle" << p_idle[0] << "_M1, " << czas << ", " << tmp2 << ";";			
+				p_idle[1]+=tmp2;
+				czas=tmp;
+				p_idle[0]++;
+			}
+	}
+	plik << endl;
+
+	plik << "M2:";
+	i = 0;
+	czas = 0;
+	while(i < n-1) {
+		if(czas == start2[0]) {//wykonywanie operacji
+			plik << " op2_" << kolejnosc2[i] << ", " << start2[i] << ", " << konce[kolejnosc2[i]]-start2[i] << ";";
+			czas = konce[kolejnosc2[i]];
+			i++;
+		}
+		else {//nic sie nie dzieje
+			int tmp = start2[i];
+			int tmp2 = tmp-czas;
+			plik << " idle" << p_idle[0] << "_M2, " << czas << ", " << tmp2 << ";";			
+			p_idle[3]+=tmp2;
+			czas=tmp;
+			p_idle[2]++;
+			}
+	}
+	plik << endl;
+	
+	plik << p_konserwujaca[0] << ", " << p_konserwujaca[1] << endl;
+	plik << "0, 0" << endl;
+	plik << p_idle[0] << ", " << p_idle[1] << endl;
+	plik << p_idle[2] << ", " << p_idle[3] << endl;
+	plik << "*** EOF ***";
+	plik.close();
+}
 
 Rozwiazanie::~Rozwiazanie()
 {
