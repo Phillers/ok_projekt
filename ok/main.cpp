@@ -3,6 +3,7 @@
 #include"Instancja.h"
 #include"Rozwiazanie.h"
 #define max_populacja 200
+#define min_populacja 50
 
 void generuj() {
 	//20
@@ -70,7 +71,7 @@ int main() {
 		roz[i] = new Rozwiazanie(instancja);
 	
 
-	Rozwiazanie *poczatkowe = Rozwiazanie::sprawdz(50, roz);
+	Rozwiazanie *poczatkowe = Rozwiazanie::sprawdz(min_populacja, roz);
 	int wartosc_poczatkowa=poczatkowe->w();
 	Rozwiazanie *najlepsze = poczatkowe;
 	roz[0]->print();
@@ -91,7 +92,7 @@ int main() {
 		najlepsze = koncowe;
 	}
 
-	roz = Rozwiazanie::selekcja(max_populacja, roz);
+	roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
 
 
 
