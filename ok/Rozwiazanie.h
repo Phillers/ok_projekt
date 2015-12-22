@@ -29,5 +29,7 @@ public:
 	Rozwiazanie* krzyzowanie(Rozwiazanie* partner);
 	int w();
 	void zapisz(int nr, int wartosc_poczatkowa);
+	static Rozwiazanie *sprawdz(int populacja, Rozwiazanie **tmp);
+	static Rozwiazanie **selekcja(int min_populacja, int max_populacja, Rozwiazanie **tmp);//Turniej
 	~Rozwiazanie();
 };

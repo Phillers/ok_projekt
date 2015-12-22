@@ -273,6 +273,54 @@ void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
 	plik.close();
 }
 
+static Rozwiazanie *sprawdz(int populacja, Rozwiazanie **tmp) {
+	Rozwiazanie *roz_poczatkowe = tmp[0];
+	int minimalna =  tmp[0]->w;
+	for(int i = 1; i < populacja; i++) {
+		if(minimalna > tmp[i]->w) {
+			roz_poczatkowe = tmp[i];
+			minimalna = tmp[i]->w;
+		}
+	}
+	return roz_poczatkowe;
+}
+
+static Rozwiazanie **selekcja(int min_populacja, int max_populacja, Rozwiazanie **roz) {
+	srand(time(NULL));
+	Rozwiazanie **tmp = new Rozwiazanie *[max_populacja];
+	bool *used = new bool[max_populacja];
+	for(int i = 0; i < max_populacja; i++)
+		used[i] = false;
+	int osobnikow = 0;
+	int *random = new int[max_populacja/min_populacja];
+
+	while(osobnikow < min_populacja) {
+		
+		//wylosowanie 1 rozwiazania
+		do{
+			random[0] = rand() % max_populacja;
+		}while( used[random[0]] );
+		used[random[0]] = true;
+		tmp[osobnikow] = roz[random[0]];
+
+		//wylosowanie pozostalych rozwiazan do turnieju
+		for(int i = 1; i < max_populacja/min_populacja; i++) {
+		do{
+			random[i] = rand() % max_populacja;
+		}while( used[random[i]] );
+			used[random[i]] = true;
+
+			//sprawdzenie ktory lepszy
+			if(tmp[osobnikow]->w() >  roz[random[i]]->w()) {
+				tmp[osobnikow] = roz[random[i]];
+			}
+		}
+
+		osobnikow++;
+	}
+
+}
+
 Rozwiazanie::~Rozwiazanie()
 {
 	delete[]kolejnosc1,kolejnosc2, start1, start2, konce, konce2;
