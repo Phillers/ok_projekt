@@ -318,7 +318,7 @@ static Rozwiazanie **selekcja(int min_populacja, int max_populacja, Rozwiazanie 
 
 		osobnikow++;
 	}
-
+	return tmp;
 }
 
 Rozwiazanie::~Rozwiazanie()
