@@ -202,6 +202,7 @@ int Rozwiazanie::w() {
 }
 
 void Rozwiazanie::zapisz(int nr) {
+	cout << 2;
 	int n = inst->z();
 	stringstream nazwa;
 	nazwa << "rozwiazania\\roz" << nr;
@@ -217,12 +218,12 @@ void Rozwiazanie::zapisz(int nr) {
 	}
 	p_konserwujaca[0] = 0;
 	p_konserwujaca[1] = 0;
-
+	cout << 3;
 	plik << "M1:";
 	int i=0;
 	int czas=0;
 	while(i < n) {
-		if(czas == start1[0]) {//wykonywanie operacji
+		if(czas == start1[i]) {//wykonywanie operacji
 			plik << " op1_" << kolejnosc1[i] << ", " << start1[i] << ", " << konce[kolejnosc1[i]]-start1[i] << ";";
 			czas = konce[kolejnosc1[i]];
 			i++;
@@ -245,12 +246,12 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-
+	cout << 4;
 	plik << "M2:";
 	i = 0;
 	czas = 0;
 	while(i < n) {
-		if(czas == start2[0]) {//wykonywanie operacji
+		if(czas == start2[i]) {//wykonywanie operacji
 			plik << " op2_" << kolejnosc2[i] << ", " << start2[i] << ", " << konce[kolejnosc2[i]]-start2[i] << ";";
 			czas = konce[kolejnosc2[i]];
 			i++;
@@ -265,7 +266,7 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-	
+	cout << 5;
 	plik << p_konserwujaca[0] << ", " << p_konserwujaca[1] << endl;
 	plik << "0, 0" << endl;
 	plik << p_idle[0] << ", " << p_idle[1] << endl;

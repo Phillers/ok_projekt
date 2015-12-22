@@ -75,6 +75,7 @@ int main() {
 	roz->print();
 	cout << endl;
 	//for (int i = 0; i < 1000; i++)cout << time(0) << " ";
+	cout << 1;
 	roz->zapisz(0);
 	system("pause");
 
