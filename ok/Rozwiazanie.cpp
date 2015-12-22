@@ -200,14 +200,14 @@ int Rozwiazanie::w() {
 	return wartosc;
 }
 
-void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
+void Rozwiazanie::zapisz(int nr) {
 	int n = inst->z();
 	stringstream nazwa;
 	nazwa << "rozwiazania\\roz" << nr;
 	ofstream plik;
 	plik.open(nazwa.str());
 	plik << "**** " << nr <<" ****"<<endl;
-	plik << wartosc << "," << wartosc_poczatkowa << endl;
+	plik << wartosc << "," << inst->pierwszaWartosc << endl;
 
 	int p_konserwujaca[2];
 	int p_idle[4];
@@ -221,7 +221,7 @@ void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
 	int i=0;
 	int czas=0;
 	while(i < n) {
-		if(czas == start1[0]) {//wykonywanie operacji
+		if(czas == start1[i]) {//wykonywanie operacji
 			plik << " op1_" << kolejnosc1[i] << ", " << start1[i] << ", " << konce[kolejnosc1[i]]-start1[i] << ";";
 			czas = konce[kolejnosc1[i]];
 			i++;
@@ -249,7 +249,7 @@ void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
 	i = 0;
 	czas = 0;
 	while(i < n) {
-		if(czas == start2[0]) {//wykonywanie operacji
+		if(czas == start2[i]) {//wykonywanie operacji
 			plik << " op2_" << kolejnosc2[i] << ", " << start2[i] << ", " << konce[kolejnosc2[i]]-start2[i] << ";";
 			czas = konce[kolejnosc2[i]];
 			i++;
@@ -257,7 +257,7 @@ void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
 		else {//nic sie nie dzieje
 			int tmp = start2[i];
 			int tmp2 = tmp-czas;
-			plik << " idle" << p_idle[0] << "_M2, " << czas << ", " << tmp2 << ";";			
+			plik << " idle" << p_idle[2] << "_M2, " << czas << ", " << tmp2 << ";";			
 			p_idle[3]+=tmp2;
 			czas=tmp;
 			p_idle[2]++;
