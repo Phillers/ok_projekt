@@ -2,6 +2,8 @@
 #include"Zadanie.h"
 #include"Instancja.h"
 #include"Rozwiazanie.h"
+#define max_populacja 200
+
 void generuj() {
 	//20
 	for (int i = 1; i <= 5; i++) {
@@ -60,25 +62,43 @@ Instancja* wczytaj(int nr) {
 int main() {
 	//generuj();
 	Instancja* instancja=wczytaj(0);
-	Rozwiazanie* roz = new Rozwiazanie(instancja);
-	int wartosc_poczatkowa=roz->w();
-	roz->print();
+
+	Rozwiazanie** roz = new Rozwiazanie *[max_populacja];
+	
+
+	for(int i = 0; i < max_populacja; i++)
+		roz[i] = new Rozwiazanie(instancja);
+	
+
+	Rozwiazanie *poczatkowe = Rozwiazanie::sprawdz(50, roz);
+	int wartosc_poczatkowa=poczatkowe->w();
+	Rozwiazanie *najlepsze = poczatkowe;
+	roz[0]->print();
 	cout << endl;
-	Rozwiazanie* roz2 = roz->mutacja(10);
+	Rozwiazanie* roz2 = roz[0]->mutacja(10);
 	roz2->print();
 	cout << endl;
-	roz = roz->mutacja(10);
+	roz[0] = roz[0]->mutacja(10);
 
-	roz->print();
+	roz[0]->print();
 	cout << endl;
-	roz = roz->krzyzowanie(roz2);
-	roz->print();
+	roz[0] = roz[0]->krzyzowanie(roz2);
+	roz[0]->print();
 	cout << endl;
 	//for (int i = 0; i < 1000; i++)cout << time(0) << " ";
-	roz->zapisz(0, wartosc_poczatkowa);
+	Rozwiazanie *koncowe = Rozwiazanie::sprawdz(max_populacja, roz);
+	if(najlepsze->w() > koncowe->w()) {
+		najlepsze = koncowe;
+	}
+
+	roz = Rozwiazanie::selekcja(max_populacja, roz);
+
+
+
+	najlepsze->zapisz(0, wartosc_poczatkowa);
 	system("pause");
 
 	cout << endl;
 
-	delete instancja, roz;
+	//delete instancja, roz;
 }
