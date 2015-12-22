@@ -11,7 +11,6 @@
 using namespace std;
 class Rozwiazanie
 {
-	Instancja* inst;
 	int* kolejnosc1;
 	int* start1;
 	int* konce;
@@ -21,6 +20,7 @@ class Rozwiazanie
 	int wartosc;
 	void uporzadkuj2m();
 public:
+	Instancja* inst;
 	int policz();
 	Rozwiazanie(Instancja* inst);
 	Rozwiazanie();
@@ -28,7 +28,7 @@ public:
 	Rozwiazanie* mutacja(int x);
 	Rozwiazanie* krzyzowanie(Rozwiazanie* partner);
 	int w();
-	void zapisz(int nr, int wartosc_poczatkowa);
+	void zapisz(int nr);
 	static Rozwiazanie *sprawdz(int populacja, Rozwiazanie **tmp);
 	static Rozwiazanie **selekcja(int min_populacja, int max_populacja, Rozwiazanie **tmp);//Turniej
 	~Rozwiazanie();
