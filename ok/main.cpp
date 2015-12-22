@@ -61,7 +61,7 @@ int main() {
 	//generuj();
 	Instancja* instancja=wczytaj(0);
 	Rozwiazanie* roz = new Rozwiazanie(instancja);
-	int wartosc_poczatkowa=roz->w();
+	
 	roz->print();
 	cout << endl;
 	Rozwiazanie* roz2 = roz->mutacja(10);
@@ -75,7 +75,7 @@ int main() {
 	roz->print();
 	cout << endl;
 	//for (int i = 0; i < 1000; i++)cout << time(0) << " ";
-	roz->zapisz(0, wartosc_poczatkowa);
+	roz->zapisz(0);
 	system("pause");
 
 	cout << endl;

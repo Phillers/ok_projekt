@@ -28,6 +28,6 @@ public:
 	Rozwiazanie* mutacja(int x);
 	Rozwiazanie* krzyzowanie(Rozwiazanie* partner);
 	int w();
-	void zapisz(int nr, int wartosc_poczatkowa);
+	void zapisz(int nr);
 	~Rozwiazanie();
 };

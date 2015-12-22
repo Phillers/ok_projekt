@@ -7,7 +7,7 @@ void Generator::generuj(int seed)
 	ofstream plik;
 	stringstream nazwa;
 	nazwa << "instancje\\inst" << nr;
-	cout << nazwa.str();
+	//cout << nazwa.str();
 	plik.open(nazwa.str());
 	plik << "**** "<<nr<<" ****"<<endl;
 	plik << n << endl;

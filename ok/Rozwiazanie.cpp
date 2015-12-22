@@ -79,6 +79,7 @@ void Rozwiazanie::uporzadkuj2m()
 	}
 	wartosc = 0;
 	for (int i = 0; i < n; i++)wartosc += (konce[i] + konce2[i]);
+	if (inst->pierwszaWartosc == 0)inst->pierwszaWartosc = wartosc;
 }
 
 int Rozwiazanie::policz()
@@ -127,7 +128,7 @@ Rozwiazanie * Rozwiazanie::mutacja(int x)
 {
 	int n = inst->z();
 	srand(time(0));
-	cout << rand() << endl;
+	//cout << rand() << endl;
 	Rozwiazanie* res = new Rozwiazanie();
 	res->inst = inst;
 	res->kolejnosc1 = new int[n];
@@ -200,14 +201,14 @@ int Rozwiazanie::w() {
 	return wartosc;
 }
 
-void Rozwiazanie::zapisz(int nr, int wartosc_poczatkowa) {
+void Rozwiazanie::zapisz(int nr) {
 	int n = inst->z();
 	stringstream nazwa;
 	nazwa << "rozwiazania\\roz" << nr;
 	ofstream plik;
 	plik.open(nazwa.str());
 	plik << "**** " << nr <<" ****"<<endl;
-	plik << wartosc << "," << wartosc_poczatkowa << endl;
+	plik << wartosc << "," << inst->pierwszaWartosc << endl;
 
 	int p_konserwujaca[2];
 	int p_idle[4];
