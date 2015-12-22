@@ -5,7 +5,8 @@
 
 #define max_populacja 200
 #define min_populacja 50
-//niech zawsze bedzie podzielne przez 4 bo inaczej w selekcji nie beda braly udzial wszystkie rozwiazania
+//niech zawsze daja reszte z dzielenia 0 bo inaczej w selekcji nie beda braly udzial wszystkie rozwiazania
+// lub nigdy sie nie skonczy
 
 
 void generuj() {
