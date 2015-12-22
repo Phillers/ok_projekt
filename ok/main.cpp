@@ -69,16 +69,15 @@ int main() {
 	Instancja* instancja=wczytaj(0);
 
 	Rozwiazanie** roz = new Rozwiazanie *[max_populacja];
-	
 
 	for(int i = 0; i < max_populacja; i++)
 		roz[i] = new Rozwiazanie(instancja);
-	
 
 	Rozwiazanie *poczatkowe = Rozwiazanie::sprawdz(min_populacja, roz);
-	int wartosc_poczatkowa=poczatkowe->w();
+	instancja->pierwszaWartosc = poczatkowe->w();
 	Rozwiazanie *najlepsze = poczatkowe;
 	roz[0]->print();
+
 	cout << endl;
 	Rozwiazanie* roz2 = roz[0]->mutacja(10);
 	roz2->print();
@@ -90,7 +89,7 @@ int main() {
 	roz[0] = roz[0]->krzyzowanie(roz2);
 	roz[0]->print();
 	cout << endl;
-	//for (int i = 0; i < 1000; i++)cout << time(0) << " ";
+
 	Rozwiazanie *koncowe = Rozwiazanie::sprawdz(max_populacja, roz);
 	if(najlepsze->w() > koncowe->w()) {
 		najlepsze = koncowe;
@@ -100,10 +99,15 @@ int main() {
 
 
 
-	najlepsze->zapisz(0, wartosc_poczatkowa);
+	najlepsze->zapisz(0);
 	system("pause");
 
 	cout << endl;
 
-	//delete instancja, roz;
+	delete instancja, poczatkowe, najlepsze, koncowe;
+
+	for(int i = 0; i < max_populacja; i++) {
+		delete roz[i];
+	}
+	delete [] roz;
 }
