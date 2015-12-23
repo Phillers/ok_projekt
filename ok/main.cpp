@@ -14,8 +14,8 @@ void generuj() {
 	//20
 	for (int i = 1; i <= 5; i++) {
 		Generator a(20, i * Generator::n/10);
-		a.generuj(0);
 		a.generuj(1);
+		a.generuj(0);
 	}
 	//200
 	for (int i = 1; i <= 5; i++) {
@@ -63,17 +63,14 @@ Instancja* wczytaj(int nr) {
 	return inst;
 }
 
+void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 
-
-int main() {
-	//generuj();
-	Instancja* instancja=wczytaj(0);
+	instancja=wczytaj(nr);
 	instancja->pierwszaWartosc = 0;
-	Rozwiazanie** roz = new Rozwiazanie *[max_populacja];
 	for(int i = 0; i < max_populacja; i++)
-		roz[i] = new Rozwiazanie(instancja);
-	Rozwiazanie *poczatkowe = Rozwiazanie::sprawdz(min_populacja, roz);
-	Rozwiazanie *najlepsze = poczatkowe;
+			roz[i] = new Rozwiazanie(instancja);
+
+	Rozwiazanie *najlepsze = Rozwiazanie::sprawdz(min_populacja, roz);
 	Rozwiazanie *koncowe = najlepsze;
 	clock_t endtime = clock();
 	clock_t starttime = clock();
@@ -117,17 +114,43 @@ int main() {
 		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
 		endtime = clock();
 	}
+	najlepsze->zapisz(nr);
 
 
-	najlepsze->zapisz(0);
+
+}
+
+
+
+int main() {
+	//generuj();
+
+	//to x dodalem zeby mozna bylo latwiej manipulowac iloscia instancji do testowania bez tworzenia
+	//calkowicie nowego pliku bo wtedy Generator::nr by sie nie zwiekszal jak funkcja generuj() jest zakomentowana
+	int x = Generator::nr;
+	Instancja** instancja = new Instancja *[x];
+	Rozwiazanie*** roz = new Rozwiazanie **[x];
+	for(int i = 0; i < x; i++)
+		roz[i] = new Rozwiazanie *[max_populacja];
+
+
+	
+	for(int nr = 0; nr < x; nr++)
+		testuj(instancja[nr], roz[nr], nr);
+
+
+
 	system("pause");
 
-	cout << endl;
+	//cout << endl;
 
-	delete instancja, poczatkowe, najlepsze, koncowe;
 
-	for(int i = 0; i < max_populacja; i++) {
-		delete roz[i];
-	}
-	delete [] roz;
+	
+	//W zasadzie to delete mozna pominac co nie? Bo i tak w momencie zakonczenia programu uruchamiaja sie destruktory
+	//delete instancja, najlepsze, koncowe;
+
+	//for(int i = 0; i < max_populacja; i++) {
+	//	delete roz[i];
+	//}
+	//delete [] roz;
 }
