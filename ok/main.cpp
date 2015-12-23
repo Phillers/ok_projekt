@@ -128,6 +128,7 @@ int main() {
 	//to x dodalem zeby mozna bylo latwiej manipulowac iloscia instancji do testowania bez tworzenia
 	//calkowicie nowego pliku bo wtedy Generator::nr by sie nie zwiekszal jak funkcja generuj() jest zakomentowana
 	int x = Generator::nr;
+	x = 1;//tylko plik inst0
 	Instancja** instancja = new Instancja *[x];
 	Rozwiazanie*** roz = new Rozwiazanie **[x];
 	for(int i = 0; i < x; i++)
