@@ -2,11 +2,12 @@
 #include"Zadanie.h"
 #include"Instancja.h"
 #include"Rozwiazanie.h"
+#include <time.h>
 
 #define max_populacja 200
 #define min_populacja 50
-//niech zawsze daja reszte z dzielenia 0 bo inaczej w selekcji nie beda braly udzial wszystkie rozwiazania
-// lub nigdy sie nie skonczy
+//niech zawsze daja reszte z dzielenia 0(i najlepiej podzielne przez 2)
+//bo inaczej w selekcji nie beda braly udzial wszystkie rozwiazania
 
 
 void generuj() {
@@ -67,36 +68,55 @@ Instancja* wczytaj(int nr) {
 int main() {
 	//generuj();
 	Instancja* instancja=wczytaj(0);
-
+	instancja->pierwszaWartosc = 0;
 	Rozwiazanie** roz = new Rozwiazanie *[max_populacja];
-
 	for(int i = 0; i < max_populacja; i++)
 		roz[i] = new Rozwiazanie(instancja);
-
 	Rozwiazanie *poczatkowe = Rozwiazanie::sprawdz(min_populacja, roz);
-	instancja->pierwszaWartosc = poczatkowe->w();
 	Rozwiazanie *najlepsze = poczatkowe;
-	roz[0]->print();
+	Rozwiazanie *koncowe = najlepsze;
+	clock_t endtime = clock();
+	clock_t starttime = clock();
+	while( ((double)(endtime-starttime)/CLOCKS_PER_SEC) < 15 )//po ilu sekundach przerwac
+	{
 
-	cout << endl;
-	Rozwiazanie* roz2 = roz[0]->mutacja(10);
-	roz2->print();
-	cout << endl;
-	roz[0] = roz[0]->mutacja(10);
+		//Mutacja pierwszych elementow
+		for(int i = 0; i < max_populacja/4; i++)
+			roz[i+min_populacja] = roz[i]->mutacja(10);
+		//cout << endl;
+		//Rozwiazanie* roz2 = roz[0]->mutacja(10);
+		//roz2->print();
+		//cout << endl;
+		//roz[0] = roz[0]->mutacja(10);
+		
+		//krzyzowanie niezmutowanych z niezmutowanymi
+		for(int i = 0; i < ((max_populacja/4) - 1); i++)
+			roz[i+max_populacja/4] = roz[i]->krzyzowanie(roz[i+1]);
+		roz[max_populacja/2-1] = roz[min_populacja-1]->krzyzowanie(roz[0]);
 
-	roz[0]->print();
-	cout << endl;
-	roz[0] = roz[0]->krzyzowanie(roz2);
-	roz[0]->print();
-	cout << endl;
+		//krzyzowanie niezmutowanych ze zmutowanymi
+		for(int i = 0; i < max_populacja/4; i++)
+			roz[i+max_populacja/2] = roz[i]->krzyzowanie(roz[i+max_populacja/4]);
 
-	Rozwiazanie *koncowe = Rozwiazanie::sprawdz(max_populacja, roz);
-	if(najlepsze->w() > koncowe->w()) {
-		najlepsze = koncowe;
+		//krzyzowanie zmutowanych ze zmutowanymi
+		for(int i = 0; i < ((max_populacja/4) - 1); i++)
+			roz[i+(3*max_populacja/4)] = roz[i+min_populacja]->krzyzowanie(roz[i+min_populacja+1]);
+		roz[max_populacja-1] = roz[3*max_populacja/4]->krzyzowanie(roz[max_populacja-2]);
+
+		//roz[0]->print();
+		//cout << endl;
+		//roz[0] = roz[0]->krzyzowanie(roz2);
+		//roz[0]->print();
+		//cout << endl;
+
+		koncowe = Rozwiazanie::sprawdz(max_populacja, roz);
+		if(najlepsze->w() > koncowe->w()) {
+			najlepsze = koncowe;
+		}
+
+		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
+		endtime = clock();
 	}
-
-	roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
-
 
 
 	najlepsze->zapisz(0);
