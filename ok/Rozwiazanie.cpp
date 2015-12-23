@@ -276,11 +276,11 @@ void Rozwiazanie::zapisz(int nr) {
 
 static Rozwiazanie *sprawdz(int populacja, Rozwiazanie **tmp) {
 	Rozwiazanie *roz_poczatkowe = tmp[0];
-	int minimalna =  tmp[0]->w;
+	int minimalna =  tmp[0]->w();
 	for(int i = 1; i < populacja; i++) {
-		if(minimalna > tmp[i]->w) {
+		if(minimalna > tmp[i]->w()) {
 			roz_poczatkowe = tmp[i];
-			minimalna = tmp[i]->w;
+			minimalna = tmp[i]->w();
 		}
 	}
 	return roz_poczatkowe;
