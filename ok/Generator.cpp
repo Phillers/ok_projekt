@@ -7,7 +7,7 @@ void Generator::generuj(int seed)
 	ofstream plik;
 	stringstream nazwa;
 	nazwa << "instancje\\inst" << nr;
-	//cout << nazwa.str();
+	cout << nazwa.str();
 	plik.open(nazwa.str());
 	plik << "**** "<<nr<<" ****"<<endl;
 	plik << n << endl;
@@ -22,8 +22,7 @@ void Generator::generuj(int seed)
 	for (int i = 0; i < liczbaPrzerw; i++) {
 		start = rand() % ((n/liczbaPrzerw+1)*dlugoscOperacji) + start + time;
 		time = rand() % dlugoscOperacji + 1;
-		//int maszyna = rand() % 2 + 1;
-		plik  << time << ";" << start << /*";" << maszyna <<*/ ";" << endl;
+		plik  << time << ";" << start << ";" << endl;
 	}
 	plik << "**** EOF ****" << endl;
 	plik.close();

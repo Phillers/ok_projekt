@@ -8,7 +8,7 @@ class Instancja
 	Przerwa* przerwy;
 
 public:
-	int pierwszaWartosc = 0;
+	int pierwszaWartosc;
 	int z();
 	Zadanie& z(int i);
 	int p();
