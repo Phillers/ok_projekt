@@ -79,6 +79,7 @@ void Rozwiazanie::uporzadkuj2m()
 	}
 	wartosc = 0;
 	for (int i = 0; i < n; i++)wartosc += (konce[i] + konce2[i]);
+	if (inst->pierwszaWartosc == 0)inst->pierwszaWartosc = wartosc;
 }
 
 int Rozwiazanie::policz()
@@ -216,7 +217,7 @@ void Rozwiazanie::zapisz(int nr) {
 	}
 	p_konserwujaca[0] = 0;
 	p_konserwujaca[1] = 0;
-
+	cout << 3;
 	plik << "M1:";
 	int i=0;
 	int czas=0;
@@ -244,7 +245,7 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-
+	cout << 4;
 	plik << "M2:";
 	i = 0;
 	czas = 0;
@@ -264,7 +265,7 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-	
+	cout << 5;
 	plik << p_konserwujaca[0] << ", " << p_konserwujaca[1] << endl;
 	plik << "0, 0" << endl;
 	plik << p_idle[0] << ", " << p_idle[1] << endl;
