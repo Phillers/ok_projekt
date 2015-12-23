@@ -202,7 +202,7 @@ int Rozwiazanie::w() {
 }
 
 void Rozwiazanie::zapisz(int nr) {
-	cout << 2;
+	//cout << 2;
 	int n = inst->z();
 	stringstream nazwa;
 	nazwa << "rozwiazania\\roz" << nr;
@@ -218,7 +218,7 @@ void Rozwiazanie::zapisz(int nr) {
 	}
 	p_konserwujaca[0] = 0;
 	p_konserwujaca[1] = 0;
-	cout << 3;
+	//cout << 3;
 	plik << "M1:";
 	int i=0;
 	int czas=0;
@@ -246,7 +246,7 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-	cout << 4;
+	//cout << 4;
 	plik << "M2:";
 	i = 0;
 	czas = 0;
@@ -266,7 +266,7 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-	cout << 5;
+	//cout << 5;
 	plik << p_konserwujaca[0] << ", " << p_konserwujaca[1] << endl;
 	plik << "0, 0" << endl;
 	plik << p_idle[0] << ", " << p_idle[1] << endl;
