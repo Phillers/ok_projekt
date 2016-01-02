@@ -127,8 +127,8 @@ void Rozwiazanie::print()
 Rozwiazanie * Rozwiazanie::mutacja(int x)
 {
 	int n = inst->z();
-	srand(time(0));
-	cout << rand() << endl;
+	srand(clock());
+	//cout << rand() << endl;
 	Rozwiazanie* res = new Rozwiazanie();
 	res->inst = inst;
 	res->kolejnosc1 = new int[n];
@@ -217,7 +217,7 @@ void Rozwiazanie::zapisz(int nr) {
 	}
 	p_konserwujaca[0] = 0;
 	p_konserwujaca[1] = 0;
-	cout << 3;
+	
 	plik << "M1:";
 	int i=0;
 	int czas=0;
@@ -245,7 +245,7 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-	cout << 4;
+
 	plik << "M2:";
 	i = 0;
 	czas = 0;
@@ -265,7 +265,7 @@ void Rozwiazanie::zapisz(int nr) {
 			}
 	}
 	plik << endl;
-	cout << 5;
+
 	plik << p_konserwujaca[0] << ", " << p_konserwujaca[1] << endl;
 	plik << "0, 0" << endl;
 	plik << p_idle[0] << ", " << p_idle[1] << endl;
@@ -274,7 +274,7 @@ void Rozwiazanie::zapisz(int nr) {
 	plik.close();
 }
 
-static Rozwiazanie *sprawdz(int populacja, Rozwiazanie **tmp) {
+ Rozwiazanie *Rozwiazanie::sprawdz(int populacja, Rozwiazanie **tmp) {
 	Rozwiazanie *roz_poczatkowe = tmp[0];
 	int minimalna =  tmp[0]->w();
 	for(int i = 1; i < populacja; i++) {
@@ -286,7 +286,7 @@ static Rozwiazanie *sprawdz(int populacja, Rozwiazanie **tmp) {
 	return roz_poczatkowe;
 }
 
-static Rozwiazanie **selekcja(int min_populacja, int max_populacja, Rozwiazanie **roz) {
+ Rozwiazanie **Rozwiazanie::selekcja(int min_populacja, int max_populacja, Rozwiazanie **roz) {
 	srand(time(NULL));
 	Rozwiazanie **tmp = new Rozwiazanie *[max_populacja];
 	bool *used = new bool[max_populacja];
