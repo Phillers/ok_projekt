@@ -86,19 +86,11 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		//cout << endl;
 		//roz[0] = roz[0]->mutacja(10);
 		
-		//krzyzowanie niezmutowanych z niezmutowanymi
-		for(int i = 0; i < ((max_populacja/4) - 1); i++)
-			roz[i+max_populacja/4] = roz[i]->krzyzowanie(roz[i+1]);
-		roz[max_populacja/2-1] = roz[min_populacja-1]->krzyzowanie(roz[0]);
+		//krzyzowanie
+		for(int i = 0; i < (max_populacja/2); i++)
+			roz[i+max_populacja/2] = roz[i]->krzyzowanie(roz[rand()%max_populacja/2]);
 
-		//krzyzowanie niezmutowanych ze zmutowanymi
-		for(int i = 0; i < max_populacja/4; i++)
-			roz[i+max_populacja/2] = roz[i]->krzyzowanie(roz[i+max_populacja/4]);
 
-		//krzyzowanie zmutowanych ze zmutowanymi
-		for(int i = 0; i < ((max_populacja/4) - 1); i++)
-			roz[i+(3*max_populacja/4)] = roz[i+min_populacja]->krzyzowanie(roz[i+min_populacja+1]);
-		roz[max_populacja-1] = roz[3*max_populacja/4]->krzyzowanie(roz[max_populacja-2]);
 
 		//roz[0]->print();
 		//cout << endl;
@@ -110,7 +102,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		if(najlepsze->w() > koncowe->w()) {
 			najlepsze = koncowe;
 		}
-
+		cout << koncowe->w() << endl;
 		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
 		endtime = clock();
 	}
