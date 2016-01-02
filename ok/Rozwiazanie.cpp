@@ -89,7 +89,7 @@ int Rozwiazanie::policz()
 
 Rozwiazanie::Rozwiazanie(Instancja* inst)
 {
-	srand(time(0));
+	srand(clock());
 	this->inst = inst;
 	int n = inst->z();
 	kolejnosc1 = new int[n];
