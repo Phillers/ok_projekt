@@ -102,10 +102,11 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		if(najlepsze->w() > koncowe->w()) {
 			najlepsze = koncowe;
 		}
-		cout << koncowe->w() << endl;
+		//cout << koncowe->w() << endl;
 		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
 		endtime = clock();
 	}
+	najlepsze->print();
 	najlepsze->zapisz(nr);
 
 

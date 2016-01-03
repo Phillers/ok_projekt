@@ -120,7 +120,7 @@ Rozwiazanie::Rozwiazanie()
 void Rozwiazanie::print()
 {
 	for (int i = 0; i < inst->z(); i++) {
-		cout << kolejnosc1[i] << "\t"<< konce[kolejnosc1[i]] <<"\t" << konce2[kolejnosc1[i]] <<"\t"<< kolejnosc2[i] <<"\t" <<konce2[kolejnosc2[i]]<< endl;
+		cout << kolejnosc1[i] << " "<<start1[i]<< " " <<inst->z(kolejnosc1[i]).t1<< " " << konce[kolejnosc1[i]] <<"\t"<< kolejnosc2[i] <<" " <<start2[i] <<" "<< inst->z(kolejnosc2[i]).t2 << " " <<konce2[kolejnosc2[i]]<< endl;
 	}
 }
 
@@ -251,8 +251,8 @@ void Rozwiazanie::zapisz(int nr) {
 	czas = 0;
 	while(i < n) {
 		if(czas == start2[i]) {//wykonywanie operacji
-			plik << " op2_" << kolejnosc2[i] << ", " << start2[i] << ", " << konce[kolejnosc2[i]]-start2[i] << ";";
-			czas = konce[kolejnosc2[i]];
+			plik << " op2_" << kolejnosc2[i] << ", " << start2[i] << ", " << konce2[kolejnosc2[i]]-start2[i] << ";";
+			czas = konce2[kolejnosc2[i]];
 			i++;
 		}
 		else {//nic sie nie dzieje
