@@ -74,7 +74,12 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 	Rozwiazanie *koncowe = najlepsze;
 	clock_t endtime = clock();
 	clock_t starttime = clock();
-	while( ((double)(endtime-starttime)/CLOCKS_PER_SEC) < 15 )//po ilu sekundach przerwac
+	stringstream nazwa;
+	nazwa << "testy\\test" << nr;
+	ofstream plik;
+	plik.open(nazwa.str());
+	plik << najlepsze->w() << endl;
+	while( ((double)(endtime-starttime)/CLOCKS_PER_SEC) < 5 )//po ilu sekundach przerwac
 	{
 
 		//Mutacja pierwszych elementow
@@ -102,7 +107,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		if(najlepsze->w() > koncowe->w()) {
 			najlepsze = koncowe;
 		}
-		//cout << koncowe->w() << endl;
+		plik<< koncowe->w() << endl;
 		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
 		endtime = clock();
 	}
@@ -121,7 +126,7 @@ int main() {
 	//to x dodalem zeby mozna bylo latwiej manipulowac iloscia instancji do testowania bez tworzenia
 	//calkowicie nowego pliku bo wtedy Generator::nr by sie nie zwiekszal jak funkcja generuj() jest zakomentowana
 	int x = Generator::nr;
-	x = 1;//tylko plik inst0
+	x = 20;//tylko plik inst0
 	Instancja** instancja = new Instancja *[x];
 	Rozwiazanie*** roz = new Rozwiazanie **[x];
 	for(int i = 0; i < x; i++)

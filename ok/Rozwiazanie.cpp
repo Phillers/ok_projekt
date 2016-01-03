@@ -319,10 +319,18 @@ void Rozwiazanie::zapisz(int nr) {
 
 		osobnikow++;
 	}
+	delete[]used;
+	delete[]random;
+	delete[]roz;
 	return tmp;
 }
 
 Rozwiazanie::~Rozwiazanie()
 {
-	delete[]kolejnosc1,kolejnosc2, start1, start2, konce, konce2;
+	delete[]kolejnosc1;
+	delete[]kolejnosc2;
+	delete[]start1;
+	delete[]start2;
+	delete[]konce;
+	delete[]konce2;
 }
