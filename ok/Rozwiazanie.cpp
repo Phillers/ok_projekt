@@ -313,7 +313,13 @@ void Rozwiazanie::zapisz(int nr) {
 
 			//sprawdzenie ktory lepszy
 			if(tmp[osobnikow]->w() >  roz[random[i]]->w()) {
+				delete tmp[osobnikow];
 				tmp[osobnikow] = roz[random[i]];
+			}
+			else {
+				//cout << roz[random[i]]->inst->z();
+				delete roz[random[i]];
+				tmp[osobnikow]->inst;
 			}
 		}
 
@@ -333,4 +339,5 @@ Rozwiazanie::~Rozwiazanie()
 	delete[]start2;
 	delete[]konce;
 	delete[]konce2;
+	inst = inst;
 }

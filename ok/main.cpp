@@ -67,7 +67,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 
 	instancja=wczytaj(nr);
 	instancja->pierwszaWartosc = 0;
-	for(int i = 0; i < max_populacja; i++)
+	for(int i = 0; i < min_populacja; i++)
 			roz[i] = new Rozwiazanie(instancja);
 
 	Rozwiazanie *najlepsze = Rozwiazanie::sprawdz(min_populacja, roz);
@@ -93,7 +93,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		
 		//krzyzowanie
 		for(int i = 0; i < (max_populacja/2); i++)
-			roz[i+max_populacja/2] = roz[i]->krzyzowanie(roz[rand()%max_populacja/2]);
+			roz[i+max_populacja/2] = roz[i]->krzyzowanie(roz[rand()%(max_populacja/2)]);
 
 
 

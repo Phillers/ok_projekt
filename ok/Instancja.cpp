@@ -5,7 +5,9 @@
 
 int Instancja::z()
 {
-	return n;
+
+		return n;
+	
 }
 
 Zadanie& Instancja::z(int i)
