@@ -4,6 +4,7 @@
 
 void Rozwiazanie::uporzadkuj2m()
 {
+	//cout << 'u';
 	int n = inst->z();
 	int k = inst->p();
 	konce = new int[n];
@@ -91,6 +92,7 @@ Rozwiazanie::Rozwiazanie(Instancja* inst)
 {
 	srand(clock());
 	this->inst = inst;
+	//cout << 'r';
 	int n = inst->z();
 	kolejnosc1 = new int[n];
 	kolejnosc2 = new int[n];
@@ -119,13 +121,17 @@ Rozwiazanie::Rozwiazanie()
 
 void Rozwiazanie::print()
 {
-	for (int i = 0; i < inst->z(); i++) {
+	cout << 'p';
+
+	int n = inst->z();
+	for (int i = 0; i < n; i++) {
 		cout << kolejnosc1[i] << " "<<start1[i]<< " " <<inst->z(kolejnosc1[i]).t1<< " " << konce[kolejnosc1[i]] <<"\t"<< kolejnosc2[i] <<" " <<start2[i] <<" "<< inst->z(kolejnosc2[i]).t2 << " " <<konce2[kolejnosc2[i]]<< endl;
 	}
 }
 
 Rozwiazanie * Rozwiazanie::mutacja(int x)
 {
+	//cout << 'm';
 	int n = inst->z();
 	srand(clock());
 	//cout << rand() << endl;
@@ -145,6 +151,7 @@ Rozwiazanie * Rozwiazanie::mutacja(int x)
 		i1 = j;
 	}
 	res->kolejnosc1[i1] = tmp;
+	//cout << "m2";
 	i1 = rand() % (n = inst->z());
 	tmp = res->kolejnosc2[i1];
 	for (int i = 1; i < x; i++) {
@@ -159,6 +166,7 @@ Rozwiazanie * Rozwiazanie::mutacja(int x)
 
 Rozwiazanie * Rozwiazanie::krzyzowanie(Rozwiazanie * partner)
 {
+	//cout << 'k';
 	int n = inst->z();
 	Rozwiazanie* res = new Rozwiazanie();
 	res->inst = inst;
@@ -202,6 +210,7 @@ int Rozwiazanie::w() {
 }
 
 void Rozwiazanie::zapisz(int nr) {
+	cout << 'z';
 	int n = inst->z();
 	stringstream nazwa;
 	nazwa << "rozwiazania\\roz" << nr;
@@ -319,8 +328,8 @@ void Rozwiazanie::zapisz(int nr) {
 			else {
 				//cout << roz[random[i]]->inst->z();
 				delete roz[random[i]];
-				tmp[osobnikow]->inst;
 			}
+			//cout<<"x"<<tmp[osobnikow]->inst->z();
 		}
 
 		osobnikow++;

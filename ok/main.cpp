@@ -84,7 +84,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 
 		//Mutacja pierwszych elementow
 		for(int i = 0; i < max_populacja/4; i++)
-			roz[i+min_populacja] = roz[i]->mutacja(10);
+			roz[i+min_populacja] = roz[i]->mutacja(20);
 		//cout << endl;
 		//Rozwiazanie* roz2 = roz[0]->mutacja(10);
 		//roz2->print();
@@ -104,6 +104,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		//cout << endl;
 
 		koncowe = Rozwiazanie::sprawdz(max_populacja, roz);
+
 		if(najlepsze->w() > koncowe->w()) {
 			najlepsze = koncowe;
 		}
@@ -134,7 +135,7 @@ int main() {
 
 
 	
-	for(int nr = 0; nr < x; nr++)
+	for(int nr = 5; nr < x; nr++)
 		testuj(instancja[nr], roz[nr], nr);
 
 
