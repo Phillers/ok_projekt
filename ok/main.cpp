@@ -105,12 +105,12 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 
 
 		
-		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz, najlepsze);
+		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
 
 
 		koncowe = Rozwiazanie::sprawdz(min_populacja, roz);
 
-		if (najlepsze->w() > koncowe->w()) {
+		if (najlepsze->w() <= 0 || najlepsze->w() > koncowe->w()) {
 			najlepsze = koncowe;
 		}
 		plik << koncowe->w() << endl;
