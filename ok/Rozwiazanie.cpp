@@ -287,7 +287,7 @@ void Rozwiazanie::zapisz(int nr) {
 	Rozwiazanie *roz_poczatkowe = tmp[0];
 	int minimalna =  tmp[0]->w();
 	for(int i = 1; i < populacja; i++) {
-		if(minimalna > tmp[i]->w()) {
+		if((minimalna > tmp[i]->w())&&tmp[i]->w()>0) {
 			roz_poczatkowe = tmp[i];
 			minimalna = tmp[i]->w();
 		}
