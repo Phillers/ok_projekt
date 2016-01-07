@@ -71,7 +71,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 			roz[i] = new Rozwiazanie(instancja);
 
 	Rozwiazanie *najlepsze = Rozwiazanie::sprawdz(min_populacja, roz);
-	Rozwiazanie *koncowe = najlepsze;
+	Rozwiazanie *koncowe;
 	clock_t endtime = clock();
 	clock_t starttime = clock();
 	stringstream nazwa;
@@ -102,14 +102,20 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		//roz[0] = roz[0]->krzyzowanie(roz2);
 		//roz[0]->print();
 		//cout << endl;
+
+
+		
 		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
+
+
 		koncowe = Rozwiazanie::sprawdz(min_populacja, roz);
 
-		if((najlepsze->w() > koncowe->w())&&(koncowe->w()>0)) {
+		if (najlepsze->w() <= 0 || najlepsze->w() > koncowe->w()) {
 			najlepsze = koncowe;
 		}
-		plik<< koncowe->w() << endl;
-		
+		plik << koncowe->w() << endl;
+
+
 		endtime = clock();
 	}
 	najlepsze->print();
@@ -135,7 +141,7 @@ int main() {
 
 
 	
-	for(int nr = 0; nr < x; nr++)
+	for(int nr = 5; nr < x; nr++)
 		testuj(instancja[nr], roz[nr], nr);
 
 

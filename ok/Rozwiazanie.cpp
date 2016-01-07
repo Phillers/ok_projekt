@@ -322,12 +322,12 @@ void Rozwiazanie::zapisz(int nr) {
 
 			//sprawdzenie ktory lepszy
 			if(tmp[osobnikow]->w() >  roz[random[i]]->w()) {
-				delete tmp[osobnikow];
+					delete tmp[osobnikow];
 				tmp[osobnikow] = roz[random[i]];
 			}
 			else {
 				//cout << roz[random[i]]->inst->z();
-				delete roz[random[i]];
+					delete roz[random[i]];
 			}
 			//cout<<"x"<<tmp[osobnikow]->inst->z();
 		}
