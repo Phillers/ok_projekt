@@ -141,7 +141,7 @@ int main() {
 
 
 	
-	for(int nr = 5; nr < x; nr++)
+	for(int nr = 0; nr < x; nr++)
 		testuj(instancja[nr], roz[nr], nr);
 
 
