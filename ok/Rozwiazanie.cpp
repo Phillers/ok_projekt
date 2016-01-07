@@ -295,7 +295,7 @@ void Rozwiazanie::zapisz(int nr) {
 	return roz_poczatkowe;
 }
 
- Rozwiazanie **Rozwiazanie::selekcja(int min_populacja, int max_populacja, Rozwiazanie **roz) {
+ Rozwiazanie **Rozwiazanie::selekcja(int min_populacja, int max_populacja, Rozwiazanie **roz, Rozwiazanie *najlepsze) {
 	srand(time(NULL));
 	Rozwiazanie **tmp = new Rozwiazanie *[max_populacja];
 	bool *used = new bool[max_populacja];
@@ -322,12 +322,14 @@ void Rozwiazanie::zapisz(int nr) {
 
 			//sprawdzenie ktory lepszy
 			if(tmp[osobnikow]->w() >  roz[random[i]]->w()) {
-				delete tmp[osobnikow];
+				if(tmp[osobnikow] != najlepsze)
+					delete tmp[osobnikow];
 				tmp[osobnikow] = roz[random[i]];
 			}
 			else {
 				//cout << roz[random[i]]->inst->z();
-				delete roz[random[i]];
+				if (roz[random[i]] != najlepsze)
+					delete roz[random[i]];
 			}
 			//cout<<"x"<<tmp[osobnikow]->inst->z();
 		}

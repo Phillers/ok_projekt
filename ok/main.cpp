@@ -71,7 +71,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 			roz[i] = new Rozwiazanie(instancja);
 
 	Rozwiazanie *najlepsze = Rozwiazanie::sprawdz(min_populacja, roz);
-	Rozwiazanie *koncowe = najlepsze;
+	Rozwiazanie *koncowe;
 	clock_t endtime = clock();
 	clock_t starttime = clock();
 	stringstream nazwa;
@@ -79,7 +79,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 	ofstream plik;
 	plik.open(nazwa.str());
 	plik << najlepsze->w() << endl;
-	while( ((double)(endtime-starttime)/CLOCKS_PER_SEC) < 5 )//po ilu sekundach przerwac
+	while( ((double)(endtime-starttime)/CLOCKS_PER_SEC) < 10 )//po ilu sekundach przerwac
 	{
 
 		//Mutacja pierwszych elementow
@@ -109,7 +109,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 			najlepsze = koncowe;
 		}
 		plik<< koncowe->w() << endl;
-		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
+		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz, najlepsze);
 		endtime = clock();
 	}
 	najlepsze->print();
