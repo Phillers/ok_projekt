@@ -74,11 +74,14 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 	Rozwiazanie *koncowe;
 	clock_t endtime = clock();
 	clock_t starttime = clock();
-	stringstream nazwa;
-	nazwa << "testy\\test" << nr;
-	ofstream plik;
-	plik.open(nazwa.str());
-	plik << najlepsze->w() << endl;
+	stringstream nazwa1, nazwa2;
+	nazwa1 << "testy\\wart" << nr;
+	nazwa2 << "testy\\czas" << nr;
+	ofstream plik1, plik2;
+	plik1.open(nazwa1.str());
+	plik2.open(nazwa2.str());
+	plik1 << najlepsze->w() << endl;
+	plik2 << "0" << endl;
 	while( ((double)(endtime-starttime)/CLOCKS_PER_SEC) < 5 )//po ilu sekundach przerwac
 	{
 
@@ -113,27 +116,28 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		if (najlepsze->w() <= 0 || najlepsze->w() > koncowe->w()) {
 			najlepsze = koncowe;
 		}
-		plik << koncowe->w() << endl;
-
 
 		endtime = clock();
+		plik1 << koncowe->w() << endl;
+		plik2 << ((double)(endtime - starttime) / CLOCKS_PER_SEC) << endl;
 	}
-	najlepsze->print();
+	//najlepsze->print();
 	najlepsze->zapisz(nr);
 
-
+	plik1.close();
+	plik2.close();
 
 }
 
 
 
 int main() {
-	//generuj();
+	generuj();
 
 	//to x dodalem zeby mozna bylo latwiej manipulowac iloscia instancji do testowania bez tworzenia
 	//calkowicie nowego pliku bo wtedy Generator::nr by sie nie zwiekszal jak funkcja generuj() jest zakomentowana
 	int x = Generator::nr;
-	x = 20;//tylko plik inst0
+	x = 20;//do inst19
 	Instancja** instancja = new Instancja *[x];
 	Rozwiazanie*** roz = new Rozwiazanie **[x];
 	for(int i = 0; i < x; i++)
@@ -141,7 +145,7 @@ int main() {
 
 
 	
-	for(int nr = 5; nr < x; nr++)
+	for(int nr = 0; nr < x; nr++)
 		testuj(instancja[nr], roz[nr], nr);
 
 
