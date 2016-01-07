@@ -121,7 +121,7 @@ Rozwiazanie::Rozwiazanie()
 
 void Rozwiazanie::print()
 {
-	cout << 'p';
+	//cout << 'p';
 
 	int n = inst->z();
 	for (int i = 0; i < n; i++) {
@@ -210,7 +210,7 @@ int Rozwiazanie::w() {
 }
 
 void Rozwiazanie::zapisz(int nr) {
-	cout << 'z';
+	//cout << 'z';
 	int n = inst->z();
 	stringstream nazwa;
 	nazwa << "rozwiazania\\roz" << nr;
@@ -287,7 +287,7 @@ void Rozwiazanie::zapisz(int nr) {
 	Rozwiazanie *roz_poczatkowe = tmp[0];
 	int minimalna =  tmp[0]->w();
 	for(int i = 1; i < populacja; i++) {
-		if((minimalna > tmp[i]->w())&&tmp[i]->w()>0) {
+		if(minimalna > tmp[i]->w()) {
 			roz_poczatkowe = tmp[i];
 			minimalna = tmp[i]->w();
 		}
