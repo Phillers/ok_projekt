@@ -96,7 +96,7 @@ Rozwiazanie::Rozwiazanie(Instancja* inst)
 	int n = inst->z();
 	kolejnosc1 = new int[n];
 	kolejnosc2 = new int[n];
-	for (int i = 0; i < 50; i++) {
+	for (int i = 0; i < n; i++) {
 		kolejnosc1[i] = i;
 		kolejnosc2[i] = i;
 	}
