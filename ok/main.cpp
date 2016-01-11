@@ -3,7 +3,7 @@
 #include"Instancja.h"
 #include"Rozwiazanie.h"
 #include <time.h>
-
+ 
 #define max_populacja 200
 #define min_populacja 50
 //niech zawsze daja reszte z dzielenia 0(i najlepiej podzielne przez 2)
@@ -63,7 +63,7 @@ Instancja* wczytaj(int nr) {
 	return inst;
 }
 
-void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
+void testuj(Instancja *instancja, Rozwiazanie **roz, int nr,int ilosc_mutacji, int stopien_mutacji) {
 
 	instancja=wczytaj(nr);
 	instancja->pierwszaWartosc = 0;
@@ -86,8 +86,8 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 	{
 
 		//Mutacja pierwszych elementow
-		for(int i = 0; i < max_populacja/4; i++)
-			roz[i+min_populacja] = roz[i]->mutacja(20);
+		for(int i = 0; i < ilosc_mutacji; i++)
+			roz[i+min_populacja] = roz[i]->mutacja(stopien_mutacji);
 		//cout << endl;
 		//Rozwiazanie* roz2 = roz[0]->mutacja(10);
 		//roz2->print();
@@ -95,8 +95,8 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 		//roz[0] = roz[0]->mutacja(10);
 		
 		//krzyzowanie
-		for(int i = 0; i < (max_populacja/2); i++)
-			roz[i+max_populacja/2] = roz[i]->krzyzowanie(roz[rand()%(max_populacja/2)]);
+		for(int i = ilosc_mutacji+min_populacja; i < (max_populacja); i++)
+			roz[i] = roz[rand() % (ilosc_mutacji + min_populacja)]->krzyzowanie(roz[rand()%(ilosc_mutacji + min_populacja)]);
 
 
 
@@ -146,7 +146,7 @@ int main() {
 
 	
 	for(int nr = 0; nr < x; nr++)
-		testuj(instancja[nr], roz[nr], nr);
+		testuj(instancja[nr], roz[nr], nr,min_populacja,25);
 
 
 
