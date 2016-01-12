@@ -3,27 +3,30 @@
 #include"Instancja.h"
 #include"Rozwiazanie.h"
 #include <time.h>
- 
-#define max_populacja 200
+
+#define max_populacja 100
 #define min_populacja 50
-//niech zawsze daja reszte z dzielenia 0(i najlepiej podzielne przez 2)
+//niech zawsze daja reszte z dzielenia 0(i najlepiej podzielne przez 4 max_populacja)
 //bo inaczej w selekcji nie beda braly udzial wszystkie rozwiazania
 
+#define stopien_mutacji 10
+#define ilosc_mutacji 30
+//ilosc mutacji musi byc z przedzialu <0;max_populacja-min_populacja>
 
 void generuj() {
 	//20
-	for (int i = 1; i <= 5; i++) {
-		Generator a(20, i * Generator::n/10);
-		a.generuj(1);
-		a.generuj(0);
+	srand(time(NULL));
+	int przerw;
+	for (int i = 0; i <= 1; i++) {
+
+		przerw = (rand() % (Generator::n / 2 - 2)) + 2;
+		Generator a1(20, przerw);
+		a1.generuj(i);
+
+		przerw = (rand() % (Generator::n / 2 - 2)) + 2;
+		Generator a2(200, przerw);
+		a2.generuj((i + 1) % 2);
 	}
-	//200
-	for (int i = 1; i <= 5; i++) {
-		Generator a(200, i * Generator::n / 10);
-		a.generuj(0);
-		a.generuj(1);
-	}
-	
 
 
 }
@@ -34,15 +37,15 @@ Instancja* wczytaj(int nr) {
 	ifstream plik;
 	plik.open(nazwa.str());
 	string a;
-	getline(plik,a);
-	int n,k;
+	getline(plik, a);
+	int n, k;
 	char x;
 	plik >> n;
-	Zadanie* zadania=new Zadanie[n];
+	Zadanie* zadania = new Zadanie[n];
 	for (int i = 0; i < n; i++) {
 		int a, b, c;
 
-		plik >> a >>x>> b >> x >> c >> x;
+		plik >> a >> x >> b >> x >> c >> x;
 		//cout <<" "<< a << " " << b << " " << c<<endl;
 		zadania[i].t1 = a;
 		zadania[i].t2 = b;
@@ -56,47 +59,47 @@ Instancja* wczytaj(int nr) {
 		//cout << " " << a << " " << b << endl;
 		przerwy[i].t = a;
 		przerwy[i].s = b;
-		przerwy[i].k = a+b;
+		przerwy[i].k = a + b;
 	}
 	plik.close();
-	Instancja* inst=new Instancja(n, zadania, k, przerwy);
+	Instancja* inst = new Instancja(n, zadania, k, przerwy);
 	return inst;
 }
 
-void testuj(Instancja *instancja, Rozwiazanie **roz, int nr,int ilosc_mutacji, int stopien_mutacji) {
+void testuj(Instancja *instancja, Rozwiazanie **roz, int nr) {
 
-	instancja=wczytaj(nr);
+	instancja = wczytaj(nr);
 	instancja->pierwszaWartosc = 0;
-	for(int i = 0; i < min_populacja; i++)
-			roz[i] = new Rozwiazanie(instancja);
+	for (int i = 0; i < min_populacja; i++)
+		roz[i] = new Rozwiazanie(instancja);
 
 	Rozwiazanie *najlepsze = Rozwiazanie::sprawdz(min_populacja, roz);
 	Rozwiazanie *koncowe;
 	clock_t endtime = clock();
 	clock_t starttime = clock();
 	stringstream nazwa1, nazwa2;
-	nazwa1 << "testy\\wart" << nr;
-	nazwa2 << "testy\\czas" << nr;
+	nazwa1 << "wykres\\wart" << nr << ".txt";
+	nazwa2 << "wykres\\czas" << nr << ".txt";
 	ofstream plik1, plik2;
 	plik1.open(nazwa1.str());
 	plik2.open(nazwa2.str());
 	plik1 << najlepsze->w() << endl;
 	plik2 << "0" << endl;
-	while( ((double)(endtime-starttime)/CLOCKS_PER_SEC) < 5 )//po ilu sekundach przerwac
+	while (((double)(endtime - starttime) / CLOCKS_PER_SEC) < 5)//po ilu sekundach przerwac
 	{
 
 		//Mutacja pierwszych elementow
-		for(int i = 0; i < ilosc_mutacji; i++)
-			roz[i+min_populacja] = roz[i]->mutacja(stopien_mutacji);
+		for (int i = 0; i < ilosc_mutacji; i++)
+			roz[i + min_populacja] = roz[i]->mutacja(stopien_mutacji);
 		//cout << endl;
 		//Rozwiazanie* roz2 = roz[0]->mutacja(10);
 		//roz2->print();
 		//cout << endl;
 		//roz[0] = roz[0]->mutacja(10);
-		
+
 		//krzyzowanie
-		for(int i = ilosc_mutacji+min_populacja; i < (max_populacja); i++)
-			roz[i] = roz[rand() % (ilosc_mutacji + min_populacja)]->krzyzowanie(roz[rand()%(ilosc_mutacji + min_populacja)]);
+		for (int i = ilosc_mutacji + min_populacja; i < (max_populacja); i++)
+			roz[i] = roz[rand() % (ilosc_mutacji + min_populacja)]->krzyzowanie(roz[rand() % (ilosc_mutacji + min_populacja)]);
 
 
 
@@ -107,7 +110,7 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr,int ilosc_mutacji, i
 		//cout << endl;
 
 
-		
+
 		roz = Rozwiazanie::selekcja(min_populacja, max_populacja, roz);
 
 
@@ -132,30 +135,31 @@ void testuj(Instancja *instancja, Rozwiazanie **roz, int nr,int ilosc_mutacji, i
 
 
 int main() {
-	generuj();
+	//generuj();
 
 	//to x dodalem zeby mozna bylo latwiej manipulowac iloscia instancji do testowania bez tworzenia
 	//calkowicie nowego pliku bo wtedy Generator::nr by sie nie zwiekszal jak funkcja generuj() jest zakomentowana
 	int x = Generator::nr;
-	x = 20;//do inst19
+	//x = 20;//do inst19
+	x = 4;//do inst3
 	Instancja** instancja = new Instancja *[x];
 	Rozwiazanie*** roz = new Rozwiazanie **[x];
-	for(int i = 0; i < x; i++)
+	for (int i = 0; i < x; i++)
 		roz[i] = new Rozwiazanie *[max_populacja];
 
 
-	
-	for(int nr = 0; nr < x; nr++)
-		testuj(instancja[nr], roz[nr], nr,min_populacja,25);
+
+	for (int nr = 0; nr < x; nr++)
+		testuj(instancja[nr], roz[nr], nr);
 
 
-
+	cout << endl;
 	system("pause");
 
 	//cout << endl;
 
 
-	
+
 	//W zasadzie to delete mozna pominac co nie? Bo i tak w momencie zakonczenia programu uruchamiaja sie destruktory
 	//delete instancja, najlepsze, koncowe;
 
